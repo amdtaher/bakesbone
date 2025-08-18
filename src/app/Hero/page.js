@@ -44,7 +44,7 @@ const Page = () => {
             <ul className="flex md:flex-7/10 flex-col items-center justify-between gap-5">
               {picks.map((item) => (
                 <li key={item.id} className="w-full flex items-center justify-between gap-5 md:gap-10">
-                  <div className="flex items-center justify-stasrt gap-2 md:gap-5 pr-10">
+                  <div className="flex items-center justify-center gap-2 md:gap-5">
                     <Image
                       src={item.img}
                       width={50}
