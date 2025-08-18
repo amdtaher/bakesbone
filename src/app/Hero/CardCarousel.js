@@ -12,9 +12,9 @@ import {
 
 // Demo slides (3)
 const slides = [
-    { id: 0, theme: "#f7b54c", badgeBg: "#25614c", badgeText: "#f4bc64", price: "$12", rating: "(4.8)", sweetText: "sweeee \n eeeeet!", sideText: "freshly crafted treats, made just for you", img: "/images/icon1.png" },
-    { id: 1, theme: "#6bbcff", badgeBg: "#20507a", badgeText: "#d2ecff", price: "$10", rating: "(4.3)", sweetText: "taaass \n sstty!", sideText: "Sweet creations, crafted to perfection", img: "/images/icon2.png" },
-    { id: 2, theme: "#ff7d4a", badgeBg: "#6b3f1f", badgeText: "#ffe6c9", price: "$14", rating: "(4.0)", sweetText: "delici \n ousss!", sideText: "Handmade delights, baked with love for you", img: "/images/icon3.png" },
+    { id: 0, theme: "#f7b54c", badgeBg: "#25614c", badgeText: "#fff", price: "$12", rating: "(4.8)", sweetText: "sweeee \n eeeeet!", sideText: "freshly crafted treats, made just for you", img: "/images/icon1.png", hero: "/images/hero1.png"},
+    { id: 1, theme: "#e89d34", badgeBg: "#25614c", badgeText: "#fff", price: "$10", rating: "(4.3)", sweetText: "deelici \n ousss!", sideText: "Sweet creations, crafted to perfection", img: "/images/icon2.png", hero: "/images/hero2.png" },
+    { id: 2, theme: "#a95d31", badgeBg: "#25614c", badgeText: "#fff", price: "$14", rating: "(4.0)", sweetText: "taaass \n sstty!", sideText: "Handmade delights, baked with love for you", img: "/images/icon3.png", hero: "/images/hero3.png" },
 ];
 
 function SweetCard({ slide, controls }) {
@@ -38,7 +38,7 @@ function SweetCard({ slide, controls }) {
 
                 <div className="relative z-20 flex justify-center">
                     <Image
-                        src="/images/cookies.png"
+                        src= {slide.hero}
                         alt="cookies"
                         width={300}
                         height={300}
@@ -59,12 +59,12 @@ function SweetCard({ slide, controls }) {
                 </div>
             </div>
 
-            <div className="flex items-center justify-between w-full mt-6 z-20">
+            <div className="flex items-center justify-between w-full text-[#fff] mt-6 z-20">
                 <p className="max-w-[15ch] md:max-w-[22ch] text-base md:text-lg capitalize">
                     {slide.sideText}
                 </p>
 
-                <div className="flex flex-col items-center text-white">
+                <div className="flex flex-col items-center justify-center">
                     <span className="text-2xl md:text-4xl font-bold">{slide.rating}</span>
                     <span className="text-base md:text-lg text-center">since 1985</span>
                 </div>
@@ -89,7 +89,7 @@ export default function CardCarousel() {
     }, [api]);
 
     const Controls = () => (
-        <div className="flex items-center gap-2 ml-2 md:ml-0">
+        <div className="hidden md:flex items-center justify-center gap-2 ml-2 md:ml-0">
             {slides.map((s, i) => (
                 <button
                     key={s.id}

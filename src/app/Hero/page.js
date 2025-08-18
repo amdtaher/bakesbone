@@ -2,27 +2,28 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CardCarousel from './CardCarousel';
+import { FaPlus } from "react-icons/fa6";
 
 const Page = () => {
   const picks = [
   {
     id: 1,
     name: "Honey Bun",
-    desc: "Sweet honey glaze",
+    desc: "fluffy bun with sweet honey glaze",
     price: 4.99,
     img: "/images/hon_bun.png",
   },
   {
     id: 2,
     name: "Melon Bun",
-    desc: "Melon cream inside",
+    desc: "light bun with smooth melon feeling",
     price: 5.5,
     img: "/images/bun.png",
   },
   {
     id: 3,
     name: "Chocolate Bun",
-    desc: "Loaded with chips",
+    desc: "Loaded with chocolate chips",
     price: 4.0,
     img: "/images/choco_bun.png",
   },
@@ -36,35 +37,30 @@ const Page = () => {
           <CardCarousel/>
 
           {/* Bottom Left Box */}
-          <div className="bg-white rounded-[2rem] p-5 flex flex-col gap-6 md:h-[35vh]">
-            <h4 className="text-2xl md:text-4xl font-extrabold uppercase">
+          <div className="bg-white rounded-[2rem] flex flex-col md:flex-row items-start justify-baseline md:gap-30 w-full h-full p-5 md:p-10">
+            <h4 className="md:max-w-[5ch] md:flex-3/10 text-4xl md:text-[60px] font-extrabold uppercase md:leading-14 pb-5 md:pb-0">
               Top-3 Picks
             </h4>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex md:flex-7/10 flex-col items-center justify-between gap-5">
               {picks.map((item) => (
-                <li key={item.id} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 w-[220px]">
+                <li key={item.id} className="w-full flex items-center justify-between gap-5 md:gap-10">
+                  <div className="flex items-center justify-stasrt gap-2 md:gap-5 pr-10">
                     <Image
                       src={item.img}
-                      width={45}
-                      height={45}
+                      width={50}
+                      height={50}
                       alt={item.name}
-                      className="rounded-md"
+                      className="rounded-2xl bg-[#85b8d8] px-2 py-2.5"
                     />
-                    <div>
-                      <h5 className="font-bold">{item.name}</h5>
-                      <p className="text-xs text-gray-600">{item.desc}</p>
-                    </div>
+                    <h5 className="max-w-[5ch] font-bold text-lg md:text-xl">{item.name}</h5>
                   </div>
-                  <div className="flex flex-col items-end w-[70px]">
-                    <span className="font-bold">${item.price.toFixed(2)}</span>
-                    <span className="text-xs">each</span>
-                  </div>
-                  <button
-                    className="ml-4 text-green-700 text-2xl font-bold hover:scale-110 transition"
-                  >
-                    +
-                  </button>
+                    <p className="max-w-[20ch] text-center md:text-left text-base md:text-lg text-gray-600">{item.desc}</p>
+                    <span className="flex flex-col items-start font-bold">${item.price.toFixed(2)}
+                      <span className="md:text-lg">each</span>
+                    </span>
+                    <button className="bg-[#25614d] text-[#fff] md:text-xl font-medium hover:text-[#ebb560] hover:scale-110 transition rounded-2xl p-2">
+                      <FaPlus/>
+                    </button>
                 </li>
               ))}
             </ul>
@@ -115,7 +111,7 @@ const Page = () => {
           </div>
 
           {/* Everyday Box */}
-          <div className="relative flex flex-col items-center justify-between bg-[#ee9457] rounded-[2rem] text-center capitalize pt-5 pb-10 px-4 h-[60vh]">
+          <div className="relative flex flex-col items-center justify-between bg-[#ee9457] rounded-[2rem] text-center capitalize pt-5 pb-10 px-4 md:-[60vh]">
             <h4 className="flex flex-col items-center text-[3rem] font-bold uppercase">
               everyday
             </h4>
