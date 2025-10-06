@@ -2,6 +2,7 @@ import { Sour_Gummy } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer.js";
+import { CartProvider } from "@/components/CartContext";
 
 const gummy = Sour_Gummy({
   variable: "--font-gummy",
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${gummy.variable} antialiased`}>
-        <NavBar/>
-        {children}
-        <Footer/>
+        <CartProvider>
+          <NavBar/>
+            {children}
+          <Footer/>
+        </CartProvider>
       </body>
     </html>
   );

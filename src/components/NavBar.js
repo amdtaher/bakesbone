@@ -33,7 +33,7 @@ const NavBar = () => {
                 </div>
                 {/* Nav Right */}
                 <div className='relative'>
-                    <Link href="/" className='hidden md:flex items-center gap-1 text-2xl text-white hover:text-[#e8b35f] duration-300 ease-linear uppercase before:content-[""] before:absolute before:-top-1 before:-left-6 before:bg-[#25614c] before:rounded-full before:w-30 before:h-16 before:origin-top-left before:-rotate-10 before:-z-10'>cart <FaCartShopping /></Link>
+                    {/* <Link href="/" className='hidden md:flex items-center gap-1 text-2xl text-white hover:text-[#e8b35f] duration-300 ease-linear uppercase before:content-[""] before:absolute before:-top-1 before:-left-6 before:bg-[#25614c] before:rounded-full before:w-30 before:h-16 before:origin-top-left before:-rotate-10 before:-z-10'>cart <FaCartShopping /></Link> */}
                 </div>
                 {/* Hamburger */}
                 <Link

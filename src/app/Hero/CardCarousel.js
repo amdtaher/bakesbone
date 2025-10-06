@@ -12,9 +12,9 @@ import {
 
 // Demo slides (3)
 const slides = [
-    { id: 0, theme: "#f7b54c", badgeBg: "#25614c", badgeText: "#fff", price: "$12", rating: "(4.8)", sweetText: "sweeee \n eeeeet!", sideText: "freshly crafted treats, made just for you", img: "/images/icon1.png", hero: "/images/hero1.png"},
-    { id: 1, theme: "#e89d34", badgeBg: "#25614c", badgeText: "#fff", price: "$10", rating: "(4.3)", sweetText: "deelici \n ousss!", sideText: "Sweet creations, crafted to perfection", img: "/images/icon2.png", hero: "/images/hero2.png" },
-    { id: 2, theme: "#a95d31", badgeBg: "#25614c", badgeText: "#fff", price: "$14", rating: "(4.0)", sweetText: "taaass \n sstty!", sideText: "Handmade delights, baked with love for you", img: "/images/icon3.png", hero: "/images/hero3.png" },
+    { id: 0, theme: "#f7b54c", badgeBg: "#25614c", badgeText: "#fff", price: "$12", rating: "(4.8)", sweetText: "sweeee \n eeeeet!", sideText: "freshly crafted treats, made just for you", img: "/images/icon1.webp", hero: "/images/hero1.webp"},
+    { id: 1, theme: "#e89d34", badgeBg: "#25614c", badgeText: "#fff", price: "$10", rating: "(4.3)", sweetText: "deelici \n ousss!", sideText: "Sweet creations, crafted to perfection", img: "/images/icon2.webp", hero: "/images/hero2.webp" },
+    { id: 2, theme: "#a95d31", badgeBg: "#25614c", badgeText: "#fff", price: "$14", rating: "(4.0)", sweetText: "taaass \n sstty!", sideText: "Handmade delights, baked with love for you", img: "/images/icon3.webp", hero: "/images/hero3.webp" },
 ];
 
 function SweetCard({ slide, controls }) {
@@ -29,7 +29,7 @@ function SweetCard({ slide, controls }) {
                 </h2>
 
                 <Image
-                    src="/images/splash.png"
+                    src="/images/splash.webp"
                     alt="splash"
                     width={100}
                     height={100}

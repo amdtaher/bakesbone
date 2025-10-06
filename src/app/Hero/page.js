@@ -1,50 +1,87 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import CardCarousel from './CardCarousel';
-import { FaPlus } from "react-icons/fa6";
+'use client';
+
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import CardCarousel from "./CardCarousel";
+import { FaPlus, FaCartShopping } from "react-icons/fa6";
+import Cart from "@/components/Cart";
 
 const Page = () => {
-  const picks = [
-  {
-    id: 1,
-    name: "Honey Bun",
-    desc: "fluffy bun with sweet honey glaze",
-    price: 4.99,
-    img: "/images/hon_bun.png",
-  },
-  {
-    id: 2,
-    name: "Melon Bun",
-    desc: "light bun with smooth melon feeling",
-    price: 5.5,
-    img: "/images/bun.png",
-  },
-  {
-    id: 3,
-    name: "Chocolate Bun",
-    desc: "Loaded with chocolate chips",
-    price: 4.0,
-    img: "/images/choco_bun.png",
-  },
-];
-  return (
-    <div className="py-10 px-2.5 md:px-10">
-      <div className="flex flex-col md:flex-row items-stretch gap-5 w-full">
-        {/* Left Column */}
-        <div className="flex flex-col gap-5 w-full md:w-3/4">
-          {/* Top Left Box */}
-          <CardCarousel/>
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
 
-          {/* Bottom Left Box */}
+  const picks = [
+    {
+      id: 1,
+      name: "Honey Bun",
+      desc: "fluffy bun with sweet honey glaze",
+      price: 4.99,
+      img: "/images/hon_bun.webp",
+    },
+    {
+      id: 2,
+      name: "Melon Bun",
+      desc: "light bun with smooth melon feeling",
+      price: 5.5,
+      img: "/images/bun.webp",
+    },
+    {
+      id: 3,
+      name: "Chocolate Bun",
+      desc: "Loaded with chocolate chips",
+      price: 4.0,
+      img: "/images/choco_bun.webp",
+    },
+  ];
+
+  const addToCart = (item) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((i) => i.id === item.id);
+      if (existing) {
+        return prevCart.map((i) =>
+          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
+        );
+      }
+      return [...prevCart, { ...item, qty: 1 }];
+    });
+  };
+
+  return (
+    <div className="relative py-10 px-2.5 md:px-10">
+      {/* Cart Button */}
+      <button
+        onClick={() => setCartOpen(!cartOpen)}
+        className="hidden md:flex fixed top-5 right-5 bg-[#25614d] text-white px-4 py-2 rounded-full items-center gap-2 shadow-lg hover:scale-105 transition z-50"
+      >
+        <FaCartShopping />
+        Cart ({cart.reduce((sum, i) => sum + i.qty, 0)})
+      </button>
+
+      {/* Cart Component Dropdown */}
+      {cartOpen && (
+        <div className="fixed top-16 right-5 z-40">
+          <Cart cart={cart} setCart={setCart} />
+        </div>
+      )}
+
+      {/* Main Layout */}
+      <div className="flex flex-col md:flex-row items-stretch gap-5 w-full">
+        <div className="flex flex-col gap-5 w-full md:w-3/4">
+          <CardCarousel />
+
+          {/* Top Picks */}
           <div className="bg-white rounded-[2rem] flex flex-col md:flex-row items-start justify-baseline md:gap-30 w-full h-full p-5 md:p-10">
-            <h4 className="md:max-w-[5ch] md:flex-3/10 text-4xl md:text-[60px] font-extrabold uppercase md:leading-14 pb-5 md:pb-0">
+            <h4 className="md:max-w-[5ch] text-4xl md:text-[60px] font-extrabold uppercase md:leading-14 pb-5 md:pb-0">
               Top-3 Picks
             </h4>
-            <ul className="flex md:flex-7/10 flex-col items-center justify-between gap-5">
+            <ul className="flex flex-col md:flex-1 items-center justify-between gap-5">
               {picks.map((item) => (
-                <li key={item.id} className="w-full flex items-center justify-between gap-5 md:gap-10">
-                  <div className="flex items-center justify-center gap-2 md:gap-5">
+                <li
+                  key={item.id}
+                  className="w-full flex items-center justify-between gap-5 md:gap-10"
+                >
+                  <div className="flex items-center gap-2 md:gap-5">
                     <Image
                       src={item.img}
                       width={50}
@@ -52,15 +89,21 @@ const Page = () => {
                       alt={item.name}
                       className="rounded-2xl bg-[#85b8d8] px-2 py-2.5"
                     />
-                    <h5 className="max-w-[5ch] font-bold text-lg md:text-xl">{item.name}</h5>
+                    <h5 className="font-bold text-lg md:text-xl">{item.name}</h5>
                   </div>
-                    <p className="max-w-[20ch] text-center md:text-left text-base md:text-lg text-gray-600">{item.desc}</p>
-                    <span className="flex flex-col items-start font-bold">${item.price.toFixed(2)}
-                      <span className="md:text-lg">each</span>
-                    </span>
-                    <button className="bg-[#25614d] text-[#fff] md:text-xl font-medium hover:text-[#ebb560] hover:scale-110 transition rounded-2xl p-2">
-                      <FaPlus/>
-                    </button>
+                  <p className="max-w-[20ch] text-center md:text-left text-base md:text-lg text-gray-600">
+                    {item.desc}
+                  </p>
+                  <span className="flex flex-col items-start font-bold">
+                    ${item.price.toFixed(2)}
+                    <span className="md:text-lg">each</span>
+                  </span>
+                  <button
+                    onClick={() => addToCart(item)}
+                    className="bg-[#25614d] text-white md:text-xl font-medium hover:text-[#ebb560] hover:scale-110 transition rounded-2xl p-2"
+                  >
+                    <FaPlus />
+                  </button>
                 </li>
               ))}
             </ul>
@@ -87,7 +130,7 @@ const Page = () => {
               </Link>
               <span className="bg-[#ebb560] rounded-[20px] p-3">
                 <Image
-                  src="/images/rolling_pin.png"
+                  src="/images/rolling_pin.webp"
                   width={30}
                   height={30}
                   alt="rolling pin"
@@ -95,14 +138,14 @@ const Page = () => {
               </span>
             </div>
             <Image
-              src="/images/baker.png"
+              src="/images/baker.webp"
               className="max-w-[240px] md:max-w-[260px] absolute bottom-0 left-1/2 -translate-x-1/2"
               width={260}
               height={260}
               alt="baker"
             />
             <Image
-              src="/images/join.png"
+              src="/images/join.webp"
               className="absolute top-1/3 left-1/5 md:left-1/4 -rotate-12"
               width={70}
               height={70}
@@ -116,7 +159,7 @@ const Page = () => {
               everyday
             </h4>
             <Image
-              src="/images/tart.png"
+              src="/images/tart.webp"
               width={250}
               height={250}
               alt="fruit tart"
@@ -125,7 +168,7 @@ const Page = () => {
               Freshly baked, delivered daily right to your door!
             </p>
             <Image
-              src="/images/splash.png"
+              src="/images/splash.webp"
               className="absolute bottom-1/3 right-12 md:right-20 -rotate-10"
               width={60}
               height={60}
